@@ -2,18 +2,21 @@
   "name": "@m59/file-preview",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"generate-sample-previews": "./lib/generateSamplePreviews.js"
   },
   "keywords": [],
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
   "license": "CC0-1.0",
   "dependencies": {
     "fs-extra": "^7.0.1",
+    "mime": "^2.4.3",
+    "replace-ext": "^1.0.0",
     "ulid": "^2.3.0"
   }
 }
