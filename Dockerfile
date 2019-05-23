@@ -2,10 +2,10 @@ FROM pmkr/dumb-node:12.2.0
 
 ADD ./fonts.tar.gz /usr/share/fonts/
 
+RUN apk add --no-cache fontconfig ghostscript-fonts
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
 	py3-unoconv
-RUN apk add --no-cache fontconfig ghostscript-fonts
-RUN apk add --no-cache ffmpeg imagemagick libreoffice
+RUN apk add --no-cache ffmpeg imagemagick libreoffice mupdf-tools
 
 ENV APP_HOME=/home/node
 ENV APP_DIR=$APP_HOME/app
@@ -28,6 +28,6 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
-COPY policy.xml /etc/ImageMagick-7/
+COPY --chown=root:root policy.xml /etc/ImageMagick-7/
 
 CMD [ "npm", "start" ]

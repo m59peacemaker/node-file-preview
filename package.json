@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"generate-sample-previews": "./lib/generateSamplePreviews.js"
+    "generate-sample-previews": "./lib/generateSamplePreviews.js"
   },
   "keywords": [],
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
@@ -18,5 +18,9 @@
     "mime": "^2.4.3",
     "replace-ext": "^1.0.0",
     "ulid": "^2.3.0"
+  },
+  "devDependencies": {
+    "pngquant-bin": "^5.0.2",
+    "zora": "^3.0.1"
   }
 }
