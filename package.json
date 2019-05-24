@@ -16,6 +16,7 @@
   "dependencies": {
     "fs-extra": "^7.0.1",
     "mime": "^2.4.3",
+    "promisify-child-process": "^3.1.0",
     "replace-ext": "^1.0.0",
     "ulid": "^2.3.0"
   },
