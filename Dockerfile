@@ -1,6 +1,8 @@
+FROM pmkr/fonts:latest AS fonts
+
 FROM pmkr/dumb-node:12.2.0
 
-ADD ./fonts.tar.gz /usr/share/fonts/
+COPY --from=fonts /usr/share/fonts /usr/share/fonts
 
 RUN apk add --no-cache fontconfig ghostscript-fonts
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
