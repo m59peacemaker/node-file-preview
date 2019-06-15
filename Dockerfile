@@ -1,6 +1,6 @@
 FROM pmkr/fonts:latest AS fonts
 
-FROM pmkr/dumb-node:12.2.0
+FROM pmkr/dumb-node:12.4.0
 
 COPY --from=fonts /usr/share/fonts /usr/share/fonts
 
