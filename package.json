@@ -22,11 +22,11 @@
     "mime": "^2.4.3",
     "promisify-child-process": "^3.1.0",
     "replace-ext": "^1.0.0",
+    "terminate": "^2.1.2",
     "ulid": "^2.3.0"
   },
   "devDependencies": {
     "pngquant-bin": "^5.0.2",
-    "terminate": "^2.1.2",
     "zora": "^3.0.1"
   }
 }
