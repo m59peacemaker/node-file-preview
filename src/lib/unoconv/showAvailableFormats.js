@@ -13,8 +13,9 @@ module.exports = async () =>
 			const formats = formatLines
 				.filter(v => v.length)
 				.map(line => {
-					const [ extension, description ] = line.split(/-(.*)/).map(v => v.trim())
-					return { extension, description }
+					const [ format, description ] = line.split(/-(.*)/).map(v => v.trim())
+					const extension = description.match(/\[.([^\]]+)]$/)[1]
+					return { format, description, extension }
 				})
 			return { type, formats }
 		})

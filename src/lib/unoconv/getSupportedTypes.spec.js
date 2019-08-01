@@ -3,7 +3,7 @@ const getSupportedTypes = require('./getSupportedTypes')
 
 test('unoconv getSupportedTypes()', async t => {
 	const supportedTypes = await getSupportedTypes()
-	//t.ok(supportedTypes, JSON.stringify({ supportedTypes }, null, 2))
+	t.ok(supportedTypes, JSON.stringify({ supportedTypes }, null, 2))
 
 	const someExpectedTypes = [
 		{ extension: 'txt', mimetype: 'text/plain' },
