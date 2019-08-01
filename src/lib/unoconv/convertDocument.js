@@ -1,6 +1,6 @@
 const pRetry = require('p-retry')
-const execAsync = require('../util/execAsync')
-const make_unoconv_convert_document_command = require('./make_unoconv_convert_document_command')
+const execAsync = require('../../util/execAsync')
+const makeUnoconvConvertDocumentCommand = require('./makeConvertDocumentCommand')
 
 const retryListenerConnectionFailures = fn => pRetry(
 	async () => {
@@ -23,7 +23,7 @@ const retryListenerConnectionFailures = fn => pRetry(
 
 module.exports = async options => {
 	const { outputFilePath } = options
-	const [ command, ...args ] = make_unoconv_convert_document_command(options)
+	const [ command, ...args ] = makeUnoconvConvertDocumentCommand(options)
 	await retryListenerConnectionFailures(() => execAsync(command, args))
 	return outputFilePath
 }

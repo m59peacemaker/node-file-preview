@@ -1,8 +1,8 @@
 const path = require('path')
-const convertDocument = require('./convertDocument')
-const useTmpDir = require('@m59/use-tmp-dir')
-const previewifyDocument = require('./previewifyDocument')
 const replaceExtension = require('replace-ext')
+const useTmpDir = require('@m59/use-tmp-dir')
+const convertDocument = require('./unoconv/convertDocument')
+//const previewifyDocument = require('./libreoffice/previewifyDocument')
 
 const libreOfficeCalcSpreadsheetExtensions = [
 	`.ods`,
@@ -23,6 +23,7 @@ const libreOfficeCalcSpreadsheetExtensions = [
 ]
 const isSpreadsheetExtension = extension => libreOfficeCalcSpreadsheetExtensions.includes(extension)
 
+// TODO: libreoffice previewify stuff is not currently used, so spreadsheet preview is not ideal
 module.exports = options => ({inputFilePath, outputDirectoryPath }) => useTmpDir(async tmpDir => {
 	/* const previewReadyDocumentFilePath = isSpreadsheetExtension(path.extname(inputFilePath)) */
 	/* 	? await previewifyDocument ({ */

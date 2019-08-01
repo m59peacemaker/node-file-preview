@@ -5,7 +5,7 @@ const useTmpDir = require('@m59/use-tmp-dir')
 const flat = require('array.prototype.flat')
 const flatMap = require('array.prototype.flatmap')
 const mergeDeep = require('merge-deep')
-const UnoconvListener = require('./lib/UnoconvListener')
+const UnoconvListener = require('./lib/unoconv/Listener')
 const convertDocumentToPreviewReadyPdf = require('./lib/convertDocumentToPreviewReadyPdf')
 const castArray = v => Array.isArray(v) ? v : [ v ]
 const {

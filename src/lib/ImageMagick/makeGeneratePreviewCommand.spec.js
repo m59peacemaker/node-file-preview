@@ -1,5 +1,5 @@
 const { test } = require('zora')
-const makeCommand = require('./make_ImageMagick_generate_preview_command')
+const makeCommand = require('./makeGeneratePreviewCommand')
 
 test('make_ImageMagick_generate_preview_command', t => {
 	t.equal(

@@ -22,9 +22,9 @@ const makeGeneratePreviewFunction = makeCommand =>
 			})
 
 module.exports = Object.entries({
-	generatePreviewForPdf: require('./make_MuPDF_generate_preview_command'),
-	generatePreviewForImage: require('./make_ImageMagick_generate_preview_command'),
-	generatePreviewForVideo: require('./make_FFMPEG_generate_preview_command')
+	generatePreviewForPdf: require('./mupdf/makeGeneratePreviewCommand'),
+	generatePreviewForImage: require('./ImageMagick/makeGeneratePreviewCommand'),
+	generatePreviewForVideo: require('./ffmpeg/makeGeneratePreviewCommand')
 })
 	.map(([ name, makeCommand ]) => [
 		name,
