@@ -1,6 +1,6 @@
-const execAsync = require('../execAsync')
 const mime = require('mime')
 const flat = require('array.prototype.flat')
+const execAsync = require('../../util/execAsync')
 
 const getDemuxerExtensions = async name => {
 	const extensions = (await execAsync('ffmpeg', [ '-v', '0', '-h', `demuxer=${name}` ]))

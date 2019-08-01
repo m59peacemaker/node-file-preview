@@ -1,6 +1,6 @@
-const execAsync = require('./execAsync')
-const make_unoconv_convert_document_command = require('./make_unoconv_convert_document_command')
 const pRetry = require('p-retry')
+const execAsync = require('../util/execAsync')
+const make_unoconv_convert_document_command = require('./make_unoconv_convert_document_command')
 
 const retryListenerConnectionFailures = fn => pRetry(
 	async () => {

@@ -2,8 +2,7 @@ const { test } = require('zora')
 const path = require('path')
 const fs = require('fs')
 const useTmpDir = require('@m59/use-tmp-dir')
-const generatePreview = require('./')
-const UnoconvListener = require('./UnoconvListener')
+const filePreview = require('./')
 
 const readdirFullPathsSync = directoryPath => fs.readdirSync(directoryPath)
 	.filter(file => file[0] !== '.')
@@ -12,12 +11,12 @@ const readdirFullPathsSync = directoryPath => fs.readdirSync(directoryPath)
 const sampleFilePaths = readdirFullPathsSync(path.join(__dirname, '../samples'))
 
 test('successfully generates previews for sample files with default settings', async t => {
-	const unoconvListener = await UnoconvListener({ silent: false })
+	const unoconvListener = await filePreview.UnoconvListener({ silent: false })
 	try {
 		return await Promise.all(sampleFilePaths.map(sampleFilePath => useTmpDir(async tmpDir => {
 			try {
+				const generatePreview = filePreview({ })
 				const previewFilePaths = await generatePreview
-					({ })
 					({
 						inputFilePath: sampleFilePath,
 						outputDirectoryPath: tmpDir

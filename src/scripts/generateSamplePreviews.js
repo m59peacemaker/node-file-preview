@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const generatePreview = require('./')
+const filePreview = require('../')
 const fs = require('fs-extra')
 const path = require('path')
 const pngquant = require('pngquant-bin')
-const execAsync = require('./execAsync')
 const flatMap = require('array.prototype.flatmap')
+const execAsync = require('../util/execAsync')
 const compressPng = ({ inputFilePath, outputFilePath }) => execAsync(
 	pngquant, [ '-o', outputFilePath, '--force', '--strip', inputFilePath ]
 )
@@ -58,7 +58,7 @@ const outputDirectoryPath = '/tmp/samples'
 		} = settings
 		let startTime = Date.now()
 		console.log(`STARTING`, settings)
-		const previewFilePaths = await generatePreview
+		const previewFilePaths = await filePreview
 			({
 				maxWidth,
 				maxHeight,

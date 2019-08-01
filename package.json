@@ -2,13 +2,9 @@
   "name": "@m59/file-preview",
   "version": "0.0.0",
   "description": "",
-  "main": "./lib/index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-sample-previews": "./lib/generateSamplePreviews.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",

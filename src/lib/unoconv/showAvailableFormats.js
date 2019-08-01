@@ -1,4 +1,4 @@
-const execAsync = require('../execAsync')
+const execAsync = require('../../util/execAsync')
 
 module.exports = async () =>
 	(await execAsync('unoconv', [ '--show' ]))

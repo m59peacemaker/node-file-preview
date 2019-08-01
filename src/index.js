@@ -2,17 +2,17 @@ const path = require('path')
 const fs = require('fs-extra')
 const { getType: getMimetype } = require('mime')
 const useTmpDir = require('@m59/use-tmp-dir')
-const convertDocumentToPreviewReadyPdf = require('./convertDocumentToPreviewReadyPdf')
-const mergeDeep = require('merge-deep')
 const flat = require('array.prototype.flat')
 const flatMap = require('array.prototype.flatmap')
+const mergeDeep = require('merge-deep')
+const UnoconvListener = require('./lib/UnoconvListener')
+const convertDocumentToPreviewReadyPdf = require('./lib/convertDocumentToPreviewReadyPdf')
 const castArray = v => Array.isArray(v) ? v : [ v ]
-
 const {
 	generatePreviewForPdf,
 	generatePreviewForImage,
 	generatePreviewForVideo
-} = require('./generatePreviewFunctions')
+} = require('./lib/generatePreviewFunctions')
 
 /*
 	Do not expect that a processor will output the desired file type.
@@ -144,3 +144,7 @@ module.exports = (processingOptions = {}) => {
 		}))
 	})
 }
+
+Object.assign(module.exports, {
+	UnoconvListener
+})

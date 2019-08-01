@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const path = require('path')
-const execAsync = require('./execAsync')
 const useTmpDir = require('@m59/use-tmp-dir')
+const execAsync = require('../util/execAsync')
 
 /*
 	Output files to a new tmp dir so that we can list them before moving them move them to outputDirectoryPath, which may contain other files.

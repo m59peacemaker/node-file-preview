@@ -66,15 +66,15 @@ Function dropLastColumn (sheet)
 End Function
 
 REM TODO: compare current size with desired size and take a sample cell size
-REM		and then drop a bunch of rows/columns at once for efficiency.
-REM		Otherwise, processing a huge spreadsheet could be critically strenuos
-Function cutSheetToSize (sheet, width, height, optimize)
+REM and then drop a bunch of rows/columns at once for efficiency.
+REM Otherwise, processing a huge spreadsheet could be critically strenuos
+Function cropSheetToSize (sheet, maxWidth, maxHeight, optimize)
 	If optimize Then
 		optimizeCellDimensions(sheet)
 	End If
 	dimensions = getUsedAreaDimensions(sheet)
-	tableIsTooWide = dimensions(&quot;width&quot;) &gt; width
-	tableIsTooTall = dimensions(&quot;height&quot;) &gt; height
+	tableIsTooWide = maxWidth And dimensions(&quot;width&quot;) &gt; maxWidth
+	tableIsTooTall = maxHeight And dimensions(&quot;height&quot;) &gt; maxHeight
 	While (hasCells(sheet) And (tableIsTooWide Or tableIsTooTall))
 		If tableIsTooTall Then
 			dropLastRow(sheet)
@@ -82,8 +82,8 @@ Function cutSheetToSize (sheet, width, height, optimize)
 				optimizeCellDimensions(sheet)
 			End If
 			dimensions = getUsedAreaDimensions(sheet)
-			tableIsTooWide = dimensions(&quot;width&quot;) &gt; width
-			tableIsTooTall = dimensions(&quot;height&quot;) &gt; height
+			tableIsTooWide = maxWidth And dimensions(&quot;width&quot;) &gt; maxWidth
+			tableIsTooTall = maxHeight And dimensions(&quot;height&quot;) &gt; maxHeight
 		End If
 		If tableIsTooWide Then
 			dropLastColumn(sheet)
@@ -91,19 +91,25 @@ Function cutSheetToSize (sheet, width, height, optimize)
 				optimizeCellDimensions(sheet)
 			End If
 			dimensions = getUsedAreaDimensions(sheet)
-			tableIsTooWide = dimensions(&quot;width&quot;) &gt; width
-			tableIsTooTall = dimensions(&quot;height&quot;) &gt; height
+			tableIsTooWide = maxWidth And dimensions(&quot;width&quot;) &gt; maxWidth
+			tableIsTooTall = maxHeight And dimensions(&quot;height&quot;) &gt; maxHeight
 		End If
 	Wend
 End Function
 
 Function preparePreviewForSpreadsheet (document, maxWidth, maxHeight, optimize)
 	sheet = document.getCurrentController().getActivesheet()
-		
-	cutSheetToSize(sheet, maxWidth, maxHeight, optimize)
-		
+
+	cropSheetToSize(sheet, maxWidth, maxHeight, optimize)
+
 	pageStyle = document.StyleFamilies.getByName(&quot;PageStyles&quot;).getByName(sheet.PageStyle)
-	
+
+	REM remove whitespace around table
+	pageStyle.TopMargin = 0
+	pageStyle.RightMargin = 0
+	pageStyle.LeftMargin = 0
+	pageStyle.BottomMargin = 0
+
 	REM make page same size as table
 	dimensions = getUsedAreaDimensions(sheet)
 	pageStyle.Width = dimensions(&quot;width&quot;)
@@ -111,27 +117,20 @@ Function preparePreviewForSpreadsheet (document, maxWidth, maxHeight, optimize)
 	
 	REM do not paginate table
 	pageStyle.ScaleToPages = 1
-	
-	REM remove whitespace around table
-	pageStyle.TopMargin = 0
-	pageStyle.RightMargin = 0
-	pageStyle.LeftMargin = 0
-	pageStyle.BottomMargin = 0
 End Function
 
-REM Function preparePreview (Optional document As Variant, Optional maxWidth As Variant, Optional MaxHeight As Variant)
 Function preparePreview (Optional document, Optional maxWidth, Optional maxHeight, Optional optimize)
 	If isMissing(document) Then
 		document = ThisComponent
 	End If
 	If isMissing(maxWidth) Then
-		maxWidth = 30480
+		maxWidth = False
 	End If
 	If isMissing(maxHeight) Then
-		maxHeight = 17145
+		maxHeight = False
 	End If
 	If isMissing(optimize) Then
-		optimize = True
+		optimize = False
 	End If
 	
 	If document.SupportsService(&quot;com.sun.star.sheet.SpreadsheetDocument&quot;) Then
@@ -139,9 +138,9 @@ Function preparePreview (Optional document, Optional maxWidth, Optional maxHeigh
 	End If
 End Function
 
-Function preparePreviewForFile (inputFilePath, outputFilePath)
+Function preparePreviewForFile (inputFilePath, outputFilePath, Optional maxWidth, Optional maxHeight, Optional optimize)
 	document = openFile(inputFilePath)
-	preparePreview(document)
+	preparePreview(document, maxWidth, maxHeight, optimize)
 	forceSaveFile(document, outputFilePath)
 	document.close(False)
 End Function
