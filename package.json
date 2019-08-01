@@ -20,10 +20,10 @@
     "fs-extra": "^7.0.1",
     "merge-deep": "^3.0.2",
     "mime": "^2.4.3",
+    "p-retry": "^4.1.0",
     "promisify-child-process": "^3.1.0",
     "replace-ext": "^1.0.0",
-    "terminate": "^2.1.2",
-    "ulid": "^2.3.0"
+    "terminate": "^2.1.2"
   },
   "devDependencies": {
     "pngquant-bin": "^5.0.2",
