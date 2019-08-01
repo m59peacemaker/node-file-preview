@@ -1,6 +1,10 @@
 const mime = require('mime')
 const listFormats = require('./listFormats')
 
+/*
+	Only keep formats where we can determine a mimetype.
+	For the rest, it is likely that the format value is not a proper extension.
+*/
 module.exports = async () =>
 	Object.entries(
 		(await listFormats())
