@@ -3,7 +3,7 @@ const terminate = require('util').promisify(require('terminate'))
 
 const defaults = {
 	port: 2002,
-	silent: true
+	silent: false
 }
 
 const Listener = async (options = defaults) => {
