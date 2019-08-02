@@ -33,7 +33,7 @@ module.exports = ({ processors }) => {
 			outputDirectoryPath
 		}) => {
 			const inputType =  {
-				extension: path.extname(inputFilePath).slice(1),
+				extension: path.extname(inputFilePath),
 				mimetype: inputMimetype
 			}
 
