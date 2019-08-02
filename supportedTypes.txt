@@ -1,0 +1,109 @@
+.3g2   video/3gpp2
+.3gp   video/3gpp
+.asf   video/x-ms-asf
+.avi   video/x-msvideo
+.bib
+.bmp   image/bmp
+.csv   text/csv
+.dbf
+.dif
+.doc   application/msword
+.docx  application/vnd.openxmlformats-officedocument.wordprocessingml.document
+.emf   image/emf
+.eps   application/postscript
+.fits  image/fits
+.flv   video/x-flv
+.fodg
+.fodp
+.fods
+.fodt
+.g3    image/g3fax
+.gif   image/gif
+.h261  video/h261
+.h263  video/h263
+.h264  video/h264
+.html  text/html
+.ico   image/vnd.microsoft.icon
+.jng   image/x-jng
+.jpe   image/jpeg
+.jpeg  image/jpeg
+.jpg   image/jpeg
+.ltx
+.m4v   video/x-m4v
+.met
+.mj2   video/mj2
+.mk3d  video/x-matroska
+.mks   video/x-matroska
+.mkv   video/x-matroska
+.mov   video/quicktime
+.mp4   video/mp4
+.mpeg  video/mpeg
+.odd
+.odg   application/vnd.oasis.opendocument.graphics
+.odp   application/vnd.oasis.opendocument.presentation
+.ods   application/vnd.oasis.opendocument.spreadsheet
+.odt   application/vnd.oasis.opendocument.text
+.otg   application/vnd.oasis.opendocument.graphics-template
+.otp   application/vnd.oasis.opendocument.presentation-template
+.ots   application/vnd.oasis.opendocument.spreadsheet-template
+.ott   application/vnd.oasis.opendocument.text-template
+.pbm   image/x-portable-bitmap
+.pct   image/x-pict
+.pcx   image/vnd.zbrush.pcx
+.pdb   application/vnd.palm
+.pdf   application/pdf
+.pgm   image/x-portable-graymap
+.png   image/png
+.pnm   image/x-portable-anymap
+.pot   application/vnd.ms-powerpoint
+.potm  application/vnd.ms-powerpoint.template.macroenabled.12
+.ppm   image/x-portable-pixmap
+.pps   application/vnd.ms-powerpoint
+.ppt   application/vnd.ms-powerpoint
+.pptx  application/vnd.openxmlformats-officedocument.presentationml.presentation
+.psd   image/vnd.adobe.photoshop
+.psw
+.pwp
+.pxl
+.ras   image/x-cmu-raster
+.rgb   image/x-rgb
+.rtf   application/rtf
+.sda   application/vnd.stardivision.draw
+.sdc   application/vnd.stardivision.calc
+.sdd   application/vnd.stardivision.impress
+.sdw   application/vnd.stardivision.writer
+.sgi   image/sgi
+.slk
+.stc   application/vnd.sun.xml.calc.template
+.std   application/vnd.sun.xml.draw.template
+.sti   application/vnd.sun.xml.impress.template
+.stw   application/vnd.sun.xml.writer.template
+.svg   image/svg+xml
+.svgz  image/svg+xml
+.svm
+.swf   application/x-shockwave-flash
+.sxc   application/vnd.sun.xml.calc
+.sxd   application/vnd.sun.xml.draw
+.sxi   application/vnd.sun.xml.impress
+.sxw   application/vnd.sun.xml.writer
+.tga   image/x-tga
+.tiff  image/tiff
+.txt   text/plain
+.uop
+.uos
+.uot
+.viv   video/vnd.vivo
+.vor   application/vnd.stardivision.writer
+.wbmp  image/vnd.wap.wbmp
+.webm  video/webm
+.webp  image/webp
+.wmf   image/wmf
+.wps   application/vnd.ms-works
+.xbm   image/x-xbitmap
+.xhtml application/xhtml+xml
+.xls   application/vnd.ms-excel
+.xlsx  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+.xlt   application/vnd.ms-excel
+.xml   application/xml
+.xpm   image/x-xpixmap
+.xwd   image/x-xwindowdump

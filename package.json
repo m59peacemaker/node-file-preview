@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "glob:tests": "glob-module-file --format=cjs --pattern='src/**/*.spec.js'",
-    "test": "npm run --silent glob:tests | node"
+    "test": "npm run --silent glob:tests | node",
+    "generate-supported-types-list": "./src/scripts/listSupportedTypes.js > ./supportedTypes.txt"
   },
   "keywords": [],
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
@@ -18,7 +19,6 @@
     "merge-deep": "^3.0.2",
     "mime": "^2.4.3",
     "p-retry": "^4.1.0",
-    "promisify-child-process": "^3.1.0",
     "replace-ext": "^1.0.0",
     "terminate": "^2.1.2"
   },

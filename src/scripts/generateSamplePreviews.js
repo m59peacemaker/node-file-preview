@@ -5,7 +5,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const pngquant = require('pngquant-bin')
 const flatMap = require('array.prototype.flatmap')
-const execAsync = require('../util/execAsync')
+const execAsync = require('util').promisify(require('child_process').execFile)
 const compressPng = ({ inputFilePath, outputFilePath }) => execAsync(
 	pngquant, [ '-o', outputFilePath, '--force', '--strip', inputFilePath ]
 )
