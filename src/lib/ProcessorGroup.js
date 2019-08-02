@@ -13,9 +13,9 @@ module.exports =  processors => {
 
 	const findProcessorForType = type => {
 		const { mimetype } = type
-		const extension = type.extension.replace(/^./, '')
-		findProcessorForTypeBy('mimetype', { extension, mimetype })
-		|| findProcessorForTypeBy('extension', { extension, mimetype })
+		const extension = type.extension.replace(/^\./, '')
+		return findProcessorForTypeBy('mimetype', { mimetype })
+			|| findProcessorForTypeBy('extension', { extension })
 	}
 
 	const supports = ({ extension, mimetype }) => !!findProcessorForType({ extension, mimetype })
