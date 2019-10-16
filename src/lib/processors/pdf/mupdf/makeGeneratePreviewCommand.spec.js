@@ -12,7 +12,6 @@ test('mupdf makeGeneratePreviewCommand', t => {
 			`mutool`, `draw`,
 			`-L`,
 			'-o', '/tmp/bar___rgb.png',
-			'-r', 72,
 			'-c', 'rgb',
 			'/foo/bar.pdf',
 			`1-N`
@@ -37,7 +36,6 @@ test('mupdf makeGeneratePreviewCommand', t => {
 			'-o', '/tmp/bar_1920_1080_rgba_%03d.png',
 			'-w', 1920,
 			'-h', 1080,
-			'-r', 72,
 			'-c', 'rgba',
 			'/foo/bar.pdf',
 			`2-100`
@@ -57,7 +55,6 @@ test('mupdf makeGeneratePreviewCommand', t => {
 			`-L`,
 			'-o', '/tmp/bar__1080_rgb.png',
 			'-h', 1080,
-			'-r', 72,
 			'-c', 'rgb',
 			'/foo/bar.pdf',
 			`1-N`
