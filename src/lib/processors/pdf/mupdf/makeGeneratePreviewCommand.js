@@ -62,7 +62,6 @@ module.exports = ({
 		}),
 		(maxWidth != null ? [ '-w', maxWidth ] : []),
 		(maxHeight != null ? [ '-h', maxHeight ] : []),
-		'-r', 72, // resolution
 		'-c', colorspace,
 		inputFilePath, pageRange.join('-'),
 	])
