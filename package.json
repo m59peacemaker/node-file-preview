@@ -27,7 +27,8 @@
     "mime": "^2.4.3",
     "p-retry": "^4.1.0",
     "replace-ext": "^1.0.0",
-    "terminate": "^2.1.2"
+    "terminate": "^2.1.2",
+    "try-net-connect": "^3.0.2"
   },
   "devDependencies": {
     "gfmjs": "github:getstay/gfmjs",
