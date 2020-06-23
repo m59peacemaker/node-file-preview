@@ -6,37 +6,61 @@ const defaults = {
 	silent: false
 }
 
-const Listener = async (options = defaults) => {
+const listen = (options = defaults) => {
 	const { port, silent } = { ...defaults, ...options }
-	const proc = spawn(
-		'unoconv',
-		[
-			'--listener',
-			'--port', port,
-			...(silent ? [] : [ '-vvv' ])
-		],
-		{
-			...(silent ? {} : { stdio: 'inherit' } )
-		}
-	)
+	// It is very difficult to get the logs from the unoconv process. Using `script --command` is the best way I could figure out.
+	const proc = spawn('script', [ '--quiet', '--command', `unoconv -vvv --listener --port ${port}`, '/dev/null' ])
+
+	if (!silent) {
+		proc.stdout.pipe(process.stdout)
+		proc.stderr.pipe(process.stderr)
+	}
+
 	return {
+		init: new Promise((resolve, reject) => {
+			proc.on('error', reject)
+			proc.stdout.on('data', data => {
+				if (data.toString().includes('Start listener on')) {
+					resolve()
+				}
+			})
+		}),
 		process: proc,
 		terminate: async () => terminate(proc.pid).catch(() => {})
 	}
 }
 
-module.exports = options => {
+const listenForever = options => {
 	let listener
-	const startListener = async () => {
-		listener = await Listener(options)
-		listener.process.once('exit', startListener)
+
+	const restartListener = () => {
+		listener = listen(options)
+		listener.process.once('exit', restartListener)
 	}
-	startListener()
+
+	restartListener()
 
 	return {
+		init: listener.init,
 		terminate: () => {
-			listener.process.removeListener('exit', startListener)
+			listener.process.removeListener('exit', restartListener)
 			return listener.terminate()
 		}
 	}
+}
+
+const use = options => async useFn => {
+	const listener = listenForever(options)
+	await listener.init
+	try {
+		return await useFn()
+	} finally {
+		await listener.terminate()
+	}
+}
+
+module.exports = {
+	listen,
+	listenForever,
+	use
 }
