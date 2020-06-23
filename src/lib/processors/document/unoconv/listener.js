@@ -4,12 +4,11 @@ const terminate = require('util').promisify(require('terminate'))
 
 const defaults = {
 	port: 2002,
-	silent: false,
-	initTimeoutMs: 3000
+	silent: false
 }
 
 const listen = (options = defaults) => {
-	const { port, silent, initTimeoutMs } = { ...defaults, ...options }
+	const { port, silent } = { ...defaults, ...options }
 	// It is very difficult to get the logs from the unoconv process. Using `script --command` is the best way I could figure out.
 	const proc = spawn('script', [ '--quiet', '--command', `unoconv -vvv --listener --port ${port}`, '/dev/null' ])
 	const terminateProc = async () => terminate(proc.pid).catch(() => {})
