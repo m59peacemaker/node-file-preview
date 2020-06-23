@@ -6,7 +6,7 @@ const extensionColumnLength = Math.max(
 	...filePreview.supportedTypes.map(({ extension }) => extension.length)
 )
 
-console.log(
+process.stdout.write(
 	filePreview
 		.supportedTypes
 		.map(({ extension, mimetype }) =>
