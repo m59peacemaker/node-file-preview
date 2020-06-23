@@ -37,7 +37,7 @@
     "try-net-connect": "^3.0.2"
   },
   "devDependencies": {
-    "gfmjs": "github:getstay/gfmjs",
+    "gfmjs": "github:getstay/gfmjs#v1.1.0",
     "glob-module-file": "^3.0.2",
     "pngquant-bin": "^5.0.2",
     "zora": "^3.0.1"
