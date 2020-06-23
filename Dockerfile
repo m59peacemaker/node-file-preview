@@ -50,18 +50,13 @@ USER node
 
 WORKDIR $APP_DIR
 
-ENTRYPOINT [ "dumb-init", "--" ]
+COPY --chown=node:node ./entrypoint.dev.sh $APP_HOME/
+ENTRYPOINT dumb-init $APP_HOME/entrypoint.dev.sh $0 "$@"
 
-CMD [ "npm", "start" ]
+CMD [ "bash" ]
 
 # init ~/.config/libreoffice
 # --terminate_after_init argument seems to be unreliable - unoconv reports the next run as first start
 RUN libreoffice --headless & sleep 10; kill $!
 
 COPY --chown=root:root policy.xml /etc/ImageMagick-7/
-
-COPY --chown=node:node package*.json ./
-
-RUN npm ci
-
-COPY --chown=node:node . .

@@ -1,6 +1,6 @@
-const { spawnSync } = require('child_process')
+const { execFile } = require('promisify-child-process')
 
-module.exports = spawnSync('unoconv', [ '--show', '--stdout' ])
+module.exports = async () => (await execFile('unoconv', [ '--show', '--stdout' ]))
 	// yes, unoconv logs this data to stderr
 	.stderr
 	.toString()

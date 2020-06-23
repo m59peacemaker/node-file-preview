@@ -3,19 +3,22 @@
   "version": "0.0.0",
   "description": "",
   "main": "./src/index.js",
+  "bin": {
+    "file-preview-setup": "src/scripts/setup"
+  },
   "scripts": {
-    "generate-supported-types-list": "npm run docker:build && (npm run --silent docker-run -- ./src/scripts/listSupportedTypes.js) > ./supportedTypes.txt",
     "glob:tests": "glob-module-file --format=cjs --pattern='src/**/*.spec.js'",
     "test:docs": "gfmjs README.md",
     "test:src": "npm run --silent glob:tests | node",
     "test": "npm run test:src && npm run test:docs",
-    "docker-run": "docker run --rm pmkr/node-file-preview",
+    "docker-run": "docker run --rm -v $PWD:/home/node/app pmkr/node-file-preview",
     "docker": "npm run docker:build && npm run docker-run",
-    "docker:tty": "npm run docker:build && docker run --rm -it pmkr/node-file-preview",
+    "docker:tty": "npm run docker:build && docker run -it --rm -v $PWD:/home/node/app pmkr/node-file-preview",
     "docker:build": "docker build -t pmkr/node-file-preview .",
-    "docker:test:docs": "npm run docker -- npm test:docs",
-    "docker:test:src": "npm run docker -- npm test:src",
-    "docker:test": "npm run docker -- npm test"
+    "docker:test:docs": "npm run docker -- npm run test:docs",
+    "docker:test:src": "npm run docker -- npm run test:src",
+    "docker:test": "npm run docker -- npm test",
+    "docker:setup": "npm run docker -- src/scripts/setup"
   },
   "keywords": [],
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
@@ -28,6 +31,7 @@
     "fs-extra": "^7.0.1",
     "mime": "^2.4.3",
     "p-retry": "^4.1.0",
+    "promisify-child-process": "^4.1.1",
     "replace-ext": "^1.0.0",
     "terminate": "^2.1.2",
     "try-net-connect": "^3.0.2"

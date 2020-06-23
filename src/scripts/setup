@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+const { execFile } = require('promisify-child-process')
+const fs = require('fs')
+const path = require('path')
+
+;(async () => {
+	await Promise.all([
+		'video/ffmpeg',
+		'image/ImageMagick',
+		'document/unoconv'
+	].map(async name => {
+		console.log(`setting up ${name}`)
+		await require(`../lib/processors/${name}/setup`)()
+		console.log(`${name} setup complete`)
+	}))
+	const { stdout: supportedTypes } = await execFile(path.join(__dirname, './listSupportedTypes'))
+	await fs.promises.writeFile(path.join(__dirname, '../../supportedTypes.txt'), supportedTypes)
+})()

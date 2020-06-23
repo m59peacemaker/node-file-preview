@@ -1,5 +1,5 @@
 const mime = require('mime')
-const formats = require('./ImageMagick/formats')
+const formats = require('./ImageMagick/formats.json')
 const prepareTypesList = require('../../prepareTypesList')
 
 /*
