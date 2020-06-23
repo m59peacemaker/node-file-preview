@@ -5,7 +5,14 @@
   "main": "./src/index.js",
   "scripts": {
     "glob:tests": "glob-module-file --format=cjs --pattern='src/**/*.spec.js'",
-    "test": "npm run --silent glob:tests | node",
+    "test:src": "npm run --silent glob:tests | node",
+    "test:docs": "gfmjs README.md",
+    "test": "npm run test:src && npm run test:docs",
+    "docker": "npm run docker:build && docker run --rm -it pmkr/node-file-preview",
+    "docker:build": "docker build -t pmkr/node-file-preview .",
+    "docker:test": "npm run docker:build && docker run --rm pmkr/node-file-preview npm test",
+    "docker:test:docs": "npm run docker:build && docker run --rm pmkr/node-file-preview npm run test:docs",
+    "docker:test:src": "npm run docker:build && docker run --rm pmkr/node-file-preview npm run test:src",
     "generate-supported-types-list": "./src/scripts/listSupportedTypes.js > ./supportedTypes.txt"
   },
   "keywords": [],
@@ -23,6 +30,7 @@
     "terminate": "^2.1.2"
   },
   "devDependencies": {
+    "gfmjs": "github:getstay/gfmjs",
     "glob-module-file": "^3.0.0",
     "pngquant-bin": "^5.0.2",
     "zora": "^3.0.1"
