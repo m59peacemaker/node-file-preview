@@ -7,10 +7,13 @@
 .csv   text/csv
 .dbf
 .dif
+.djvu  image/vnd.djvu
 .doc   application/msword
 .docx  application/vnd.openxmlformats-officedocument.wordprocessingml.document
 .emf   image/emf
 .eps   application/postscript
+.epub  application/epub+zip
+.exr   image/aces
 .fits  image/fits
 .flv   video/x-flv
 .fodg
@@ -22,12 +25,15 @@
 .h261  video/h261
 .h263  video/h263
 .h264  video/h264
+.heic  image/heic
 .html  text/html
 .ico   image/vnd.microsoft.icon
 .jng   image/x-jng
+.jp2   image/jp2
 .jpe   image/jpeg
 .jpeg  image/jpeg
 .jpg   image/jpeg
+.jpm   image/jpm
 .ltx
 .m4v   video/x-m4v
 .met
