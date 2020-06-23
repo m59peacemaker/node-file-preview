@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "gfmjs": "github:getstay/gfmjs",
-    "glob-module-file": "^3.0.0",
+    "glob-module-file": "^3.0.2",
     "pngquant-bin": "^5.0.2",
     "zora": "^3.0.1"
   }
