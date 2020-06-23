@@ -6,10 +6,13 @@ module.exports = {
 
 	outputDirectoryPath: null,
 
-	// use file dimensions
-	maxWidth: null,
-	maxHeight: null,
 	outputFileExtension: 'png',
+
+	image: {
+		// use file dimensions
+		maxWidth: null,
+		maxHeight: null,
+	},
 
 	document: {
 		// first page
