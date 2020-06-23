@@ -52,3 +52,21 @@ useUnoconvListener
 		*/
 	})
 ```
+
+## setup
+
+This module is dependent on information from the binaries it uses, which may be different depending on the environment. This information is cached in this project for convenience, but it is recommended to refresh this information within the environment where this module will run. Simply running the supplied setup command will update the appropriate files to accord with your environment. Be aware that if the binaries report the required information differently in your environment, this module may crash trying to parse the information, or, though unlikely,  may have innacurate results from the `supports` function.
+
+```sh
+npx file-preview-setup
+```
+
+### requirements:
+
+- ffmpeg
+- imagemagick
+- libreoffice
+- mupdf-tools
+- unoconv
+
+See the included Dockerfile for a recommended environment setup.
