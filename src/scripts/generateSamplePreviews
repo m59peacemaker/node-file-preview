@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const filePreview = require('../')
+const { use: useUnoconvListener } = require('../../unoconvListener')
 const fs = require('fs-extra')
 const path = require('path')
 const pngquant = require('pngquant-bin')
@@ -9,7 +10,6 @@ const execAsync = require('util').promisify(require('child_process').execFile)
 const compressPng = ({ inputFilePath, outputFilePath }) => execAsync(
 	pngquant, [ '-o', outputFilePath, '--force', '--strip', inputFilePath ]
 )
-const UnoconvListener = require('../../UnoconvListener')
 
 const readdirFullPaths = async (dirPath, { dotFiles = false } = {}) => {
 	const files = (await fs.readdir(dirPath))
@@ -20,15 +20,15 @@ const readdirFullPaths = async (dirPath, { dotFiles = false } = {}) => {
 		.map(file => path.join(dirPath, file))
 }
 
-const outputDirectoryPath = '/tmp/samples'
+const outputDirectoryPath = path.join(process.cwd(), '.tmp.samplePreviews')
 
-;(async () => {
-	const unoconvListener = await UnoconvListener({ silent: false })
-	try {
+useUnoconvListener
+	({ })
+	(async () => {
 		await fs.emptyDir(outputDirectoryPath)
 		const sampleFiles = (await readdirFullPaths(path.join(__dirname, '../../samples')))
 		//const outputFileExtensions = [ 'jpg', 'png', 'svg', 'gif' ]
-		const outputFileExtensions = [ 'gif' ]
+		const outputFileExtensions = [ 'png' ]
 		const dimensions = [
 			{ maxWidth: 1500, maxHeight: 1500 },
 			/* { maxWidth: 640, maxHeight: 480 }, */
@@ -51,49 +51,49 @@ const outputDirectoryPath = '/tmp/samples'
 			)
 		)
 		const totalTimes = []
-		await settings.reduce(async (promise, settings, index) => {
-			await promise
-			const {
-				inputFilePath,
-				outputFileExtension,
-				maxWidth,
-				maxHeight
-			} = settings
-			let startTime = Date.now()
-			console.log(`STARTING`, settings)
-			const previewFilePaths = await filePreview
-				({
+		await settings.reduce(
+			async (promise, settings, index) => {
+				await promise
+				const {
 					inputFilePath,
-					outputDirectoryPath,
-					maxWidth,
-					maxHeight,
 					outputFileExtension,
-					document: {
-						startPage: 1,
-						endPage: 1,
-						cropSpreadsheets: false,
-						optimizeCellDimensions: false
-					},
-					video: {
-						startTimeOffsetSeconds: 0,
-						intervalSeconds: 8,
-						maxThumbnails: 10,
-						framesConsideredPerThumbnail: 60
-					}
-				})
-			/*await Promise.all(previewFilePaths.map(inputFilePath => compressPng ({
-				inputFilePath,
-				outputFilePath: `${path.join(
-					path.dirname(inputFilePath),
-					path.basename(inputFilePath, '.png')
-				)}.tiny.png`
-			})))*/
-			let totalTime = Date.now() - startTime
-			totalTimes.push(totalTime)
-			console.log(`COMPLETED (${index + 1}) in ${totalTime / 1000} seconds.`)
-			console.log(`Average processing time: ${totalTimes.reduce((a, b) => a + b, 0) / totalTimes.length / 1000} seconds`)
-		}, Promise.resolve())
-	} finally {
-		await unoconvListener.terminate()
-	}
-})()
+					maxWidth,
+					maxHeight
+				} = settings
+				let startTime = Date.now()
+				console.log(`STARTING`, settings)
+				const previewFilePaths = await filePreview
+					({
+						inputFilePath,
+						outputDirectoryPath,
+						outputFileExtension,
+						image: {
+							maxWidth,
+							maxHeight,
+						},
+						document: {
+							startPage: 1,
+							endPage: 1
+						},
+						video: {
+							startTimeOffsetSeconds: 0,
+							intervalSeconds: 8,
+							maxThumbnails: 10,
+							framesConsideredPerThumbnail: 60
+						}
+					})
+				await Promise.all(previewFilePaths.map(inputFilePath => compressPng ({
+					inputFilePath,
+					outputFilePath: `${path.join(
+						path.dirname(inputFilePath),
+						path.basename(inputFilePath, '.png')
+					)}.tiny.png`
+				})))
+				let totalTime = Date.now() - startTime
+				totalTimes.push(totalTime)
+				console.log(`COMPLETED (${index + 1}) in ${totalTime / 1000} seconds.`)
+				console.log(`Average processing time: ${totalTimes.reduce((a, b) => a + b, 0) / totalTimes.length / 1000} seconds`)
+			},
+			Promise.resolve()
+		)
+	})

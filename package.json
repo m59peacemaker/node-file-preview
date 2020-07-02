@@ -18,7 +18,8 @@
     "docker:test:docs": "npm run docker -- npm run test:docs",
     "docker:test:src": "npm run docker -- npm run test:src",
     "docker:test": "npm run docker -- npm test",
-    "docker:setup": "npm run docker -- src/scripts/setup"
+    "docker:setup": "npm run docker -- src/scripts/setup",
+    "generateSamplePreviews": "npm run docker -- src/scripts/generateSamplePreviews"
   },
   "keywords": [],
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
