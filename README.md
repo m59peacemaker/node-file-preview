@@ -38,7 +38,8 @@ useUnoconvListener
 							intervalSeconds: 20,
 							maxThumbnails: 5,
 							framesConsideredPerThumbnail: 50
-						}
+						},
+						processTimeout: 10000 // to kill a child process in case it hangs
 					})
 					return previewFilePaths.map(filePath => path.relative(tmpDir, filePath))
 				})

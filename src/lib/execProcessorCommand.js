@@ -6,7 +6,7 @@ module.exports = async (makeCommand, options) => {
 		options.outputDirectoryPath,
 		outputDirectoryPath => {
 			const [ command, ...args ] = makeCommand({ ...options, outputDirectoryPath })
-			return execAsync(command, args)
+			return execAsync(command, args, { timeout: options.processTimeout })
 		}
 	)
 	return files

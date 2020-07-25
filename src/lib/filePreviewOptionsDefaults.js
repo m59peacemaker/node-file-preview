@@ -30,5 +30,7 @@ module.exports = {
 		// chooses the best image for a thumbnail among N frames
 		// lower: better performance, higher: better results
 		framesConsideredPerThumbnail: 60
-	}
+	},
+
+	processTimeout: 10000
 }

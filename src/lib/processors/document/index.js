@@ -4,8 +4,9 @@ const convertDocument = require('./unoconv/convertDocument')
 const supportedTypes = require('./supportedTypes')
 
 module.exports = {
-	process: ({ document, inputFilePath, outputDirectoryPath }) =>
+	process: ({ document, inputFilePath, outputDirectoryPath, ...options }) =>
 		convertDocument({
+			...options,
 			...document,
 			inputFilePath,
 			outputFilePath: path.join(
