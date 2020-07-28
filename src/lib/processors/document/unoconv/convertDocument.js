@@ -24,6 +24,6 @@ const retryListenerConnectionFailures = fn => pRetry(
 module.exports = async options => {
 	const { outputFilePath } = options
 	const [ command, ...args ] = makeConvertDocumentCommand(options)
-	await retryListenerConnectionFailures(() => execAsync(command, args, { timeout: options.processTimeout }))
+	await retryListenerConnectionFailures(() => execAsync(command, args, { timeout: options.processTimeout, killSignal: 'SIGKILL' }))
 	return outputFilePath
 }
