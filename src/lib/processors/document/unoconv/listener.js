@@ -23,7 +23,7 @@ const listen = (options = defaults) => {
 			proc.on('error', reject)
 			tryConnect({
 				retry: 500,
-				retries: 10,
+				retries: 20,
 				host: '127.0.0.1',
 				port: port
 			}).on('connected', resolve)
