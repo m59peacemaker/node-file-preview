@@ -27,20 +27,20 @@
   "dependencies": {
     "@m59/use-tmp-dir": "^1.0.2",
     "@ramda/mergedeepright": "^0.26.1",
-    "array.prototype.flat": "^1.2.3",
-    "array.prototype.flatmap": "^1.2.3",
-    "fs-extra": "^9.0.1",
-    "mime": "^2.4.6",
-    "p-retry": "^4.2.0",
+    "array.prototype.flat": "^1.2.5",
+    "array.prototype.flatmap": "^1.2.5",
+    "fs-extra": "^10.0.0",
+    "mime": "^2.5.2",
+    "p-retry": "^4.6.1",
     "promisify-child-process": "^4.1.1",
     "replace-ext": "^2.0.0",
-    "terminate": "^2.1.2",
+    "terminate": "^2.2.2",
     "try-net-connect": "^3.0.2"
   },
   "devDependencies": {
     "gfmjs": "github:getstay/gfmjs#v1.1.0",
     "glob-module-file": "^3.0.2",
     "pngquant-bin": "^6.0.0",
-    "zora": "^4.0.0"
+    "zora": "^5.0.0"
   }
 }
