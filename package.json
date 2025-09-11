@@ -1,6 +1,6 @@
 {
   "name": "@m59/file-preview",
-  "version": "1.4.2",
+  "version": "1.4.1",
   "description": "",
   "main": "./src/index.js",
   "bin": {
@@ -11,7 +11,7 @@
     "test:docs": "gfmjs README.md",
     "test:src": "npm run --silent glob:tests | node",
     "test": "npm run test:src && npm run test:docs",
-    "docker-run": "docker run --rm -v $PWD:/home/node/app pmkr/node-file-preview",
+    "docker-run": "docker run -it --rm -v $PWD:/home/node/app pmkr/node-file-preview",
     "docker": "npm run docker:build && npm run docker-run",
     "docker:tty": "npm run docker:build && docker run -it --rm -v $PWD:/home/node/app pmkr/node-file-preview",
     "docker:build": "docker build -t pmkr/node-file-preview .",
@@ -25,22 +25,23 @@
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
   "license": "CC0-1.0",
   "dependencies": {
-    "@m59/use-tmp-dir": "^1.0.2",
+    "@m59/use-tmp-dir": "^2.0.0",
     "@ramda/mergedeepright": "^0.26.1",
-    "array.prototype.flat": "^1.2.5",
-    "array.prototype.flatmap": "^1.2.5",
-    "fs-extra": "^10.0.0",
-    "mime": "^2.5.2",
-    "p-retry": "^4.6.1",
+    "array.prototype.flat": "^1.2.3",
+    "array.prototype.flatmap": "^1.2.3",
+    "fs-extra": "^9.0.1",
+    "mime": "^2.4.6",
+    "p-retry": "^4.2.0",
+    "pdfjs-dist": "^3.11.174",
     "promisify-child-process": "^4.1.1",
     "replace-ext": "^2.0.0",
-    "terminate": "^2.2.2",
+    "terminate": "^2.8.0",
     "try-net-connect": "^3.0.2"
   },
   "devDependencies": {
     "gfmjs": "github:getstay/gfmjs#v1.1.0",
     "glob-module-file": "^3.0.2",
     "pngquant-bin": "^6.0.0",
-    "zora": "^5.0.0"
+    "zora": "^4.0.0"
   }
 }
