@@ -20,7 +20,7 @@ module.exports = ({
 	maxHeight = null,
 	outputFileExtension = 'png'
 }) => {
-	const dimensions = (maxWidth || maxHeight)
+	const dimensions = (Number.isFinite(maxWidth) || Number.isFinite(maxHeight))
 		? [ maxWidth, maxHeight ].map(v => v != null ? v : '').join('x')
 		: null
 

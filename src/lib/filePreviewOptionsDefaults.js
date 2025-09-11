@@ -10,8 +10,8 @@ module.exports = {
 
 	image: {
 		// use file dimensions
-		maxWidth: null,
-		maxHeight: null,
+		maxWidth: Infinity,
+		maxHeight: Infinity
 	},
 
 	document: {
