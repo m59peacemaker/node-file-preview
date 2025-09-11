@@ -67,7 +67,7 @@ npx file-preview-setup
 - ffmpeg
 - imagemagick
 - libreoffice
-- mupdf-tools
+- pdfium_test
 - unoconv
 
 See the included Dockerfile for a recommended environment setup.
