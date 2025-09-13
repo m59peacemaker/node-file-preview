@@ -40,25 +40,31 @@ RUN apt install -y \
 # manually make unoconv use python3 (which libreoffice is using)
 # RUN sed -i ' 1 s/.*/&3/' "`which unoconv`"
 
-RUN curl -L -o /tmp/qpdf.zip https://github.com/qpdf/qpdf/releases/download/v12.2.0/qpdf-12.2.0-bin-linux-x86_64.zip \
-	&& mkdir /opt/qpdf \
-	&& unzip -d /opt/qpdf /tmp/qpdf.zip
-
-ENV PATH="/opt/qpdf/bin:${PATH}"
-
 RUN apt install -y build-essential ninja-build clang lld pkg-config
-RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /opt/depot_tools
+RUN git clone --depth=1 --filter=blob:none --no-tags --single-branch \
+  https://chromium.googlesource.com/chromium/tools/depot_tools.git /opt/depot_tools
+
 RUN export PATH="/opt/depot_tools:$PATH" \
+	&& export DEPOT_TOOLS_UPDATE=0 DEPOT_TOOLS_METRICS=0 \
 	&& mkdir /opt/pdfium && cd /opt/pdfium \
-	&& gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git \
-	&& gclient sync
+	&& gclient config --unmanaged --spec='solutions=[{ \
+		"name":"pdfium", \
+		"url":"https://pdfium.googlesource.com/pdfium.git", \
+		"deps_file":"DEPS", \
+		"managed":False, \
+		"custom_deps":{}, \
+		"custom_vars":{"checkout_configuration":"minimal"} \
+	}]' \
+	&& gclient sync --no-history \
+	&& ensure_bootstrap
 
 RUN cd /opt/pdfium/pdfium \
 	&& export PATH="/opt/depot_tools:$PATH" \
 	&& gn gen out/Release --args='is_debug=false pdf_is_standalone=true clang_use_chrome_plugins=false pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false use_glib=false use_lld=true symbol_level=0 target_cpu="x64" use_sysroot=false treat_warnings_as_errors=false' \
-	&& ninja -C out/Release pdfium_test
+	&& ninja -C out/Release pdfium_test \
+	&& mv out/Release/pdfium_test /usr/bin/
 
-ENV PATH="/opt/pdfium/pdfium/out/Release:$PATH"
+RUN rm -r /opt/pdfium /opt/depot_tools
 
 ENV APP_HOME=/home/node
 ENV APP_DIR=$APP_HOME/app
