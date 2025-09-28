@@ -76,10 +76,9 @@ USER node
 
 WORKDIR $APP_DIR
 
-COPY --chown=node:node ./entrypoint.dev.sh $APP_HOME/
-ENTRYPOINT dumb-init $APP_HOME/entrypoint.dev.sh $0 $@
+ENTRYPOINT [ "dumb-init", "--" ]
 
-CMD [ "bash" ]
+CMD [ "bash", "-c", "npm install" ]
 
 # init ~/.config/libreoffice
 # --terminate_after_init argument seems to be unreliable - unoconv reports the next run as first start

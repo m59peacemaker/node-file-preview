@@ -11,9 +11,8 @@
     "test:docs": "gfmjs README.md",
     "test:src": "npm run --silent glob:tests | node",
     "test": "npm run test:src && npm run test:docs",
-    "docker-run": "docker run -it --rm -v $PWD:/home/node/app pmkr/node-file-preview",
+    "docker-run": "docker run -it --rm --volume \"$PWD:/home/node/app\" --security-opt seccomp=\"$PWD/seccomp.json\" pmkr/node-file-preview",
     "docker": "npm run docker:build && npm run docker-run",
-    "docker:tty": "npm run docker:build && docker run -it --rm -v $PWD:/home/node/app pmkr/node-file-preview",
     "docker:build": "docker build -t pmkr/node-file-preview .",
     "docker:test:docs": "npm run docker -- npm run test:docs",
     "docker:test:src": "npm run docker -- npm run test:src",
@@ -25,6 +24,7 @@
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
   "license": "CC0-1.0",
   "dependencies": {
+    "@m59/disposer": "^2.0.0",
     "@m59/use-tmp-dir": "^2.0.0",
     "@ramda/mergedeepright": "^0.26.1",
     "array.prototype.flat": "^1.2.5",
@@ -35,7 +35,6 @@
     "pdfjs-dist": "^3.11.174",
     "promisify-child-process": "^4.1.1",
     "replace-ext": "^2.0.0",
-    "terminate": "^2.8.0",
     "try-net-connect": "^3.0.2"
   },
   "devDependencies": {
